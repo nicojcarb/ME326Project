@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+
+from matplotlib.transforms import Transform
 import rosbag
 import sensor_msgs
 from cv_bridge import CvBridge
@@ -8,6 +11,8 @@ import matplotlib.pyplot as plt
 
 import rospy
 from dt_apriltags import Detector
+import geometry_msgs
+from geometry_msgs import Vector3
 
 
 def apriltag_callback(msg):
@@ -53,16 +58,32 @@ def apriltag_callback(msg):
                     fontScale=0.8,
                     color=(0, 0, 255))
 
+    # publish coordinates
+    at_coord_publisher(tags[0].pose_t)
+
     if visualization:
         cv2.imshow('Detected tags', color_img)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
 
-
 def raw_img_subscriber():
     rospy.init_node('raw_img_subscriber', anonymous=True)
     rospy.Subscriber("/locobot/camera/color/image_raw", Image, apriltag_callback)
     rospy.spin()
+
+def at_coord_publisher(t): # TODO: add rotation
+    pub = rospy.Publisher('apriltag_camera_coord', Transform, queue_size=10)
+    rospy.init_node('apriltag_coord', anonymous=True)
+    rate = rospy.Rate(1)
+    while not rospy.is_shutdown():
+        my_message = Transform()
+        vector = Vector3()
+        vector.x = t[0]
+        vector.y = t[1]
+        vector.z = t[2]
+        my_message.translation = vector
+        pub.publish(my_message)
+        rate.sleep()
 
 if __name__ == '__main__':
     raw_img_subscriber()
