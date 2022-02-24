@@ -17,7 +17,7 @@ print(b)
 i = 0
 
 
-for topic, msg, t in b.read_messages(topics=['/locobot/pc_filter/pointcloud/filtered']):
+for topic, msg, t in b.read_messages(topics=['/locobot/pc_filter/pointcloud/filters']):
 
 	fig = plt.figure(figsize=(8,8))
 	ax = fig.add_subplot(111, projection='3d')
@@ -67,6 +67,7 @@ for topic, msg, t in b.read_messages(topics=['/locobot/pc_filter/pointcloud/filt
 	    x = points - ctr[:,np.newaxis]
 	    M = np.dot(x, x.T) # Could also use np.cov(x) here.
 	    return ctr, svd(M)[0][:,-1]
+	    '''
 	print(planeFit(xyz_array.T))  
 	point, normal = planeFit(xyz_array.T)
 	new_xyz = []
@@ -78,7 +79,7 @@ for topic, msg, t in b.read_messages(topics=['/locobot/pc_filter/pointcloud/filt
 		xp, yp, zp = point[0], point[1], point[2]
 		nx, ny, nz = normal[0], normal[1], normal[2]
 		distance = (np.abs(nx * (xp - x) + ny * (yp - y) + nz * (zp - z)) / np.sqrt(nx**2 + ny**2 + nz**2))
-		if distance > 5e-3:
+		if distance > 2e-8:
 			new_xyz.append(xyz)
 	xyz_array = np.array(new_xyz)
 	'''
@@ -90,6 +91,7 @@ for topic, msg, t in b.read_messages(topics=['/locobot/pc_filter/pointcloud/filt
 
 	xyz_array = np.array(proj_of_u_on_v)
 	'''
+	'''
 
 	d = -point.dot(normal)
 	
@@ -99,8 +101,8 @@ for topic, msg, t in b.read_messages(topics=['/locobot/pc_filter/pointcloud/filt
 	# calculate corresponding z
 	z = (-normal[0] * xx - normal[1] * yy - d) * 1. /normal[2]
 	
-	plt3d = fig.gca(projection='3d')
-	plt3d.plot_surface(xx, yy, z)
+	#plt3d = fig.gca(projection='3d')
+	#plt3d.plot_surface(xx, yy, z)
 
 	print(xyz_array)
 	ax = plt.gca()
