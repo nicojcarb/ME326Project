@@ -6,7 +6,7 @@ from sensor_msgs.msg import Image
 import numpy as np
 import matplotlib.pyplot as plt
 
-b = rosbag.Bag('today2.bag')
+b = rosbag.Bag('2022-02-15-17-32-04.bag')
 print(b)
 
 def filter_image(color_img, color_mask='r'):
