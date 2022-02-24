@@ -17,7 +17,7 @@ print(b)
 i = 0
 
 
-for topic, msg, t in b.read_messages(topics=['/locobot/pc_filter/pointcloud/objects']):
+for topic, msg, t in b.read_messages(topics=['/locobot/pc_filter/pointcloud/filters']):
 
 	fig = plt.figure(figsize=(8,8))
 	ax = fig.add_subplot(111, projection='3d')
