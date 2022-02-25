@@ -11,15 +11,23 @@ from geometry_msgs.msg import Twist
 import rospy
 import time
 from time import sleep
+from geometry_msgs.msg import Vector3, Transform
+import std_msgs
+from std_msgs.msg import Int8
 
 
 
-pub = rospy.Publisher('/locobot/mobile_base/commands/velocity', Twist, queue_size=10)
+#pub = rospy.Publisher('/locobot/mobile_base/commands/velocity', Twist, queue_size=10)
+new_pub = rospy.Publisher('/random',  Int8, queue_size=10)
 
 
 def nav_callback(msg):
+    '''
     april_tag_msg = msg
     
+    x = april_tag_msg.translation.x
+    y = april_tag_msg.translation.y
+    z = april_tag_msg.translation.z
 
     # read in position of april tags and convert it to robot frame
 
@@ -27,22 +35,28 @@ def nav_callback(msg):
 
     twist = Twist() 
 
-    twist.linear.x = pos.x
-    twist.linear.y = pos.y
+    twist.linear.x = y
+    twist.linear.y = x
+    '''
 
-    pub.publish(twist)
+    new_pub.publish(Int8(3))
 
-    sleep(1)
+    #sleep(1)
 
-    twist = Twist()
-    pub.publish(twist)
+    #twist = Twist()
+    #pub.publish(twist)
 
 
 
 def nav_april_tag_subscriber():
     rospy.init_node('move_robot', anonymous=True)
-    rospy.Subscriber("apriltag_coord_publisher", Transform, nav_callback)
+    #rospy.Subscriber("apriltag_camera_coord", Transform, nav_callback)
     rospy.spin()
 
 if __name__ == '__main__':
+    rospy.init_node('move_robot', anonymous=True)
+    while True:
+        new_pub.publish(Int8(3))
+        sleep(1)
     nav_april_tag_subscriber()
+
