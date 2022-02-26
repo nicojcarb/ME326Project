@@ -14,7 +14,7 @@ from dt_apriltags import Detector
 import geometry_msgs.msg
 from geometry_msgs.msg import Vector3, Transform
 
-
+pub = rospy.Publisher('apriltag_camera_coord', Transform, queue_size=10)
 def apriltag_callback(msg):
     visualization = False
 
@@ -80,9 +80,9 @@ def raw_img_subscriber():
 
 def at_coord_publisher(t): # TODO: add 
     print(t)
-    pub = rospy.Publisher('apriltag_camera_coord', Transform, queue_size=10)
+    
     #rospy.init_node('apriltag_coord', anonymous=True)
-    rate = rospy.Rate(0.75)
+    #rate = rospy.Rate(1)
     
     # while not rospy.is_shutdown():
     my_message = Transform()
@@ -92,7 +92,7 @@ def at_coord_publisher(t): # TODO: add
     vector.z = t[2]
     my_message.translation = vector
     pub.publish(my_message)
-    rate.sleep()
+    #rate.sleep()
 
 if __name__ == '__main__':
     raw_img_subscriber()

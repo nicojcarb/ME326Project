@@ -17,12 +17,11 @@ from std_msgs.msg import Int8
 
 
 
-#pub = rospy.Publisher('/locobot/mobile_base/commands/velocity', Twist, queue_size=10)
-new_pub = rospy.Publisher('/random',  Int8, queue_size=10)
+pub = rospy.Publisher('/locobot/mobile_base/commands/velocity', Twist, queue_size=10)
 
 
 def nav_callback(msg):
-    '''
+    
     april_tag_msg = msg
     
     x = april_tag_msg.translation.x
@@ -35,28 +34,39 @@ def nav_callback(msg):
 
     twist = Twist() 
 
-    twist.linear.x = y
-    twist.linear.y = x
-    '''
+    #twist.linear.x = y
+    #twist.linear.y = x
 
-    new_pub.publish(Int8(3))
+    print(twist.linear.x)
+    print(twist.linear.y)
+    twist.angular.z = -y
+    rospy.loginfo("publish")
+    pub.publish(twist)
+    rospy.sleep(1.)
+
+    twist = Twist() 
+    twist = Twist() 
+
+    twist.linear.y = x
+
+    rospy.loginfo("publish")
+    pub.publish(twist)
+
+    #new_pub.publish(Int8(3))
 
     #sleep(1)
 
     #twist = Twist()
-    #pub.publish(twist)
+    
 
 
 
 def nav_april_tag_subscriber():
     rospy.init_node('move_robot', anonymous=True)
-    #rospy.Subscriber("apriltag_camera_coord", Transform, nav_callback)
+    rospy.Subscriber("apriltag_camera_coord", Transform, nav_callback)
     rospy.spin()
 
 if __name__ == '__main__':
-    rospy.init_node('move_robot', anonymous=True)
-    while True:
-        new_pub.publish(Int8(3))
-        sleep(1)
+    
     nav_april_tag_subscriber()
 
