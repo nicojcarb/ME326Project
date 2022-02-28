@@ -37,20 +37,25 @@ def nav_callback(msg):
     #twist.linear.x = y
     #twist.linear.y = x
 
+    ## This doesn't work yet but idea is to turn towards the april tag and then to drive towards it.
+
+    ## This should be messed with to improve the controller.
     print(twist.linear.x)
     print(twist.linear.y)
-    twist.angular.z = -y
+    twist.angular.z = -x/2
     rospy.loginfo("publish")
     pub.publish(twist)
-    rospy.sleep(1.)
+    rospy.sleep(1)
 
     twist = Twist() 
     twist = Twist() 
 
-    twist.linear.y = x
+    twist.linear.x = y
 
     rospy.loginfo("publish")
     pub.publish(twist)
+
+    rospy.sleep(3)
 
     #new_pub.publish(Int8(3))
 
