@@ -42,10 +42,10 @@ def nav_callback(msg):
     ## This should be messed with to improve the controller.
     print(twist.linear.x)
     print(twist.linear.y)
-    twist.angular.z = -x/2
+    twist.angular.z = -x*1
     rospy.loginfo("publish")
     pub.publish(twist)
-    rospy.sleep(1)
+    rospy.sleep(5)
 
     twist = Twist() 
     twist = Twist() 
@@ -56,6 +56,15 @@ def nav_callback(msg):
     pub.publish(twist)
 
     rospy.sleep(3)
+
+    rospy.loginfo("publish")
+    pub.publish(twist)
+
+    rospy.sleep(3)
+
+    rospy.loginfo("publish")
+    pub.publish(twist)
+
 
     #new_pub.publish(Int8(3))
 
