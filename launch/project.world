@@ -1,0 +1,136 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <world name="default">
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    <model name="box1r">
+      <pose>1.1 3.0 0.5 0 0 2.5</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.045 0.045 0.045</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.045 0.045 0.045</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/RedBright</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="box1y">
+      <pose>0 1.1 0.5 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.045 0.045 0.045</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.045 0.045 0.045</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Yellow</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="box1g">
+      <pose>3.5 2.1 0.5 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.045 0.045 0.045</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.045 0.045 0.045</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Green</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="box1b">
+      <pose>5.5 -1.1 0.5 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.045 0.045 0.045</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.045 0.045 0.045</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Blue</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name='Apriltag36_11_00000'>
+      <include>
+      	<uri>model://Apriltag36_11_00000</uri>
+      </include>
+      <!--
+      <link name='main'>
+      <pose>-1.29442 -0.90772 0.02 0 -0 0</pose>
+        <visual name='main_Visual'>
+	  <geometry>
+	    <box>
+	    <size>0.5 0.5 0.01</size>
+	    </box>
+	  </geometry>
+	    <material>
+	    <script>
+	      <uri>file://localhost/home/sidneyas/gazebo_apriltag/models/Apriltag36_11_00000/materials/scripts/Apriltag.material</uri>
+	      <uri>file://localhost/home/sidneyas/gazebo_apriltag/models/Apriltag36_11_00000/materials/textures/tag36_11_00000.png</uri>
+	      <name>Apriltag36_11_00000</name>
+	    </script>
+	  </material>
+        </visual>
+      </link>
+      <static>1</static>
+      -->
+  </model>
+  </world>
+</sdf>
